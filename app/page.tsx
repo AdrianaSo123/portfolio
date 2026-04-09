@@ -1,65 +1,76 @@
-import Image from "next/image";
+import { Button } from "@/components/Button";
+import { Card } from "@/components/Card";
+import { systems, caseStudies } from "@/data/projects";
+
+export const metadata = {
+  title: "Adriana So — AI Systems + Product Thinker",
+  description: "Portfolio of Adriana So: AI pipelines, agents, and product case studies.",
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* Hero — full-width 50/50 split, no container constraint */}
+      <section className="flex flex-col md:flex-row min-h-[88vh]">
+        {/* Left panel — white, text bottom-left */}
+        <div className="w-full md:w-1/2 bg-canvas flex flex-col justify-end px-10 md:px-16 pt-24 pb-16">
+          <p className="text-xs uppercase tracking-widest text-muted mb-5">
+            AI Systems · Product Thinking
+          </p>
+          <h1 className="font-serif text-5xl md:text-[5.5rem] font-bold text-ink leading-[1.05]">
+            Building<br />the systems<br />that matter.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-base text-body mt-7 max-w-sm leading-relaxed">
+            NJIT Senior · Wakefern UX Intern · AI pipelines, agents, and structured real-world workflows.
+          </p>
+          <div className="flex flex-col gap-3 mt-9 items-start md:flex-row">
+            <Button label="View Systems" href="/systems" variant="primary" />
+            <Button label="View Case Studies" href="/case-studies" variant="secondary" />
+          </div>
+        </div>
+
+        {/* Right panel — Acid League dusty blue-gray */}
+        <div className="hidden md:flex w-1/2 bg-panel items-center justify-center relative overflow-hidden">
+          <p
+            className="font-serif text-[12rem] font-bold text-panel/70 leading-none select-none pointer-events-none"
+            aria-hidden="true"
+          >
+            AS
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Systems Preview — soap-brand warm cream bg */}
+      <section className="bg-cream border-t border-border">
+        <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-16 md:py-20">
+          <p className="text-xs uppercase tracking-widest text-muted mb-2">Systems</p>
+          <div className="mt-6">
+            {systems.length === 0 ? (
+              <p className="text-sm text-muted py-5 border-t border-border">Content coming soon.</p>
+            ) : (
+              systems.map((project) => (
+                <Card key={project.id} title={project.title} summary={project.summary} href="/systems" />
+              ))
+            )}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Case Studies Preview — Diafano mist blue bg */}
+      <section className="bg-mist border-t border-border">
+        <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-16 md:py-20">
+          <p className="text-xs uppercase tracking-widest text-muted mb-2">Case Studies</p>
+          <div className="mt-6">
+            {caseStudies.length === 0 ? (
+              <p className="text-sm text-muted py-5 border-t border-border">Content coming soon.</p>
+            ) : (
+              caseStudies.map((cs) => (
+                <Card key={cs.id} title={cs.title} summary={cs.summary} href="/case-studies" />
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

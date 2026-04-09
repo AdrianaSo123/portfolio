@@ -435,6 +435,101 @@ Follow the build order. Do not skip steps. Do not add features. Do not make assu
 
 ---
 
+## 20. Design Reference — Acid League Analysis
+
+**Added in v1.4.** The following design analysis was drawn from reviewing the Acid League website (acidleague.com) and informs the updated styling specification in Section 12.
+
+---
+
+### What Acid League does well (and what we're adopting)
+
+**1. Editorial headline treatment**
+Acid League uses a large serif display font for hero headlines ("ACV Reimagined") paired with tight, clean sans-serif for body text and navigation. This creates a high-contrast typographic hierarchy that reads as premium and intentional. We adopt this by pairing `Playfair Display` (serif) for `h1` page headings with `Inter` (sans-serif) for everything else.
+
+**2. Uppercase tracking labels**
+A small uppercase label ("LIVING TONICS") appears above the hero headline, using `tracking-widest text-xs`. This device signals category and slows the reader down before the headline lands. We adopt this as a "role label" above the hero headline on the home page.
+
+**3. Pill-shaped outline button**
+The "Shop Now" CTA uses a `rounded-full` outline pill — black border, black text, no fill — that feels minimal and intentional rather than aggressive. We replace the blue solid/outline button system with this pill approach. Primary: `rounded-full border border-gray-900 text-gray-900`. Hover: subtle background fill (`bg-gray-900 text-white`).
+
+**4. Neutral monochrome palette**
+No blue. No accent color. The palette is strictly black, white, and warm gray. This communicates confidence — the content doesn't need color to compete for attention. We replace `blue-600` as the accent with `gray-900` (near-black) throughout.
+
+**5. Generous whitespace**
+Sections breathe. Vertical rhythm is slow and deliberate. We increase section padding from `py-10/py-12` to `py-16/py-20`.
+
+**6. Clean horizontal rules as section dividers**
+Acid League uses thin `1px` horizontal rules sparingly to divide content regions. Already implemented in project/case study blocks — we reinforce this pattern.
+
+---
+
+### What we're NOT adopting
+
+- **Centered navbar brand name** — Acid League centers "Acid League" in the navbar. For a portfolio with fewer nav items, left-aligned name + right-aligned links reads better and is conventional on personal sites.
+- **Split hero layout with photography** — The 50/50 image split works for a product. For text-first portfolio content, a full-width text hero with generous padding is cleaner.
+- **Announcement bar** — Not applicable for a portfolio.
+- **Dark mode / color scheme switching** — Out of scope per Section 15.
+
+---
+
+### Updated color palette (replaces Section 12.1)
+
+| Role | Value | Tailwind class |
+|---|---|---|
+| Background | `#ffffff` | `bg-white` |
+| Primary text | `#0f0f0f` | `text-gray-950` (or `text-[#0f0f0f]`) |
+| Secondary text | `#6b7280` | `text-gray-500` |
+| Muted text | `#9ca3af` | `text-gray-400` |
+| Border | `#e5e5e5` | `border-neutral-200` |
+| Accent / CTA | `#0f0f0f` | `text-gray-950` / `border-gray-950` |
+| Label (uppercase) | `#6b7280` | `text-gray-500` |
+
+No blue. No gradients. No color other than black, white, and gray.
+
+---
+
+### Updated typography (replaces Section 12.2)
+
+| Element | Font | Classes |
+|---|---|---|
+| Hero `h1` | Playfair Display (serif) | `font-serif text-4xl md:text-6xl font-bold text-[#0f0f0f] leading-tight` |
+| Page heading `h1` | Playfair Display (serif) | `font-serif text-3xl md:text-4xl font-bold text-[#0f0f0f]` |
+| Section heading `h2` | Inter (sans) | `text-xs font-medium uppercase tracking-widest text-gray-500` |
+| Card title | Inter (sans) | `text-base font-semibold text-[#0f0f0f]` |
+| Body text | Inter (sans) | `text-base text-gray-700 leading-relaxed` |
+| Label (above headline) | Inter (sans) | `text-xs uppercase tracking-widest text-gray-500` |
+| Muted / meta | Inter (sans) | `text-sm text-gray-400` |
+
+Load `Playfair Display` via `next/font/google` alongside `Inter`. Apply `font-serif` class via a CSS variable.
+
+---
+
+### Updated button spec (replaces Section 12.4)
+
+Single style. No solid/outline distinction — both variants use the pill outline approach, differentiated by fill on hover only.
+
+**Base classes (both variants):**
+```
+px-6 py-3 rounded-full border border-[#0f0f0f] text-sm font-medium
+text-[#0f0f0f] hover:bg-[#0f0f0f] hover:text-white
+transition-colors duration-150 text-center
+```
+
+The `variant` prop is kept for potential future differentiation but both render identically for now.
+
+---
+
+### Updated card spec (replaces Section 12.3)
+
+Remove the colored border hover. Cards become more minimal — hover is a subtle background shift only.
+
+```
+border border-neutral-200 rounded-lg p-6 cursor-pointer
+hover:bg-neutral-50 transition-colors duration-150
+```
+
+---
+
 ## 19. Changelog
 
 | Version | Change |
@@ -443,3 +538,4 @@ Follow the build order. Do not skip steps. Do not add features. Do not make assu
 | 1.1 | Rewrote to full implementation-ready spec |
 | 1.2 | Fixed LinkedIn href placeholder (`#`); clarified `"use client"` permitted only on `Navbar.tsx`; resolved `py-12` conflict (Section 5.1 defers to Section 13); specified `<Link>` wrapping for card click behavior; added `/app/favicon.ico` to file structure; normalized `/data/projects.ts` path with leading slash throughout |
 | 1.3 | Added `z-10` to navbar to prevent content overlap; fixed Section 6 intro still citing `py-12` directly; added `className="block"` to `<Link>` card wrappers to ensure full card is clickable; fixed Build Order step 10 acceptance criteria count (13 → 15); normalized `/data/projects.ts` leading slash in AC #6 and #7; resolved hero name font size ambiguity (`text-sm`) |
+| 1.4 | Added Section 20: Acid League design analysis. Updated color palette (black/neutral, no blue), typography (Playfair Display for headings), button style (pill outline), card hover (bg shift not border), section padding increase. |
