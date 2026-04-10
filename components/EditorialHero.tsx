@@ -25,10 +25,10 @@ export function EditorialHero() {
       </div>
 
       {/* Right Column: Editorial Image */}
-      <div className="relative w-full h-[60vh] md:h-screen flex items-center justify-center bg-cream">
+      <div className="relative w-full h-[60vh] md:h-screen flex items-center justify-center bg-canvas">
         <Image 
-          src="/editorial-hero.png" 
-          alt="A minimal editorial glass interface slab resting on stone" 
+          src="/hero-native-mac-core-v2.png" 
+          alt="A refined high-fidelity native styling of an Apple macOS aesthetic desktop collage" 
           fill
           priority
           sizes="(max-width: 768px) 100vw, 50vw"
