@@ -3,17 +3,15 @@ import Link from "next/link";
 type ButtonProps = {
   label: string;
   href: string;
-  variant: "primary" | "secondary";
+  variant?: "primary" | "secondary";
 };
 
-export function Button({ label, href, variant }: ButtonProps) {
-  const base = "px-6 py-2.5 rounded-full text-sm tracking-wide transition-colors duration-150 text-center";
-  const styles =
-    variant === "secondary"
-      ? `${base} border border-accent text-accent hover:bg-accent hover:text-cream`
-      : `${base} border border-ink text-ink hover:bg-ink hover:text-cream`;
+export function Button({ label, href, variant = "primary" }: ButtonProps) {
+  // Both variants map to the same unified DTC style for now
+  const styles = "inline-block px-8 py-3 rounded-full border border-ink text-sm font-medium text-ink hover:bg-ink hover:text-canvas transition-colors duration-200 text-center";
+  
   return (
-    <Link href={href} className={styles}>
+    <Link href={href} className={styles} data-testid={`button-${variant}`}>
       {label}
     </Link>
   );

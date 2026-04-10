@@ -24,7 +24,7 @@ Build a minimal, professional portfolio website for Adriana So. The site must co
 
 | Concern | Decision |
 |---|---|
-| Framework | Next.js 14+ (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Styling | Tailwind CSS v3 |
 | Language | TypeScript |
 | Deployment | Vercel |
@@ -89,11 +89,7 @@ Every page shares one root layout. The layout enforces:
 The navbar is sticky (`position: sticky`, `top: 0`), full-width, white background, with a `1px` bottom border in `#e5e7eb` (Tailwind `border-gray-200`). Add `z-10` to ensure it renders above scrolling content.
 
 **Left side:** Text link "Adriana So" — navigates to `/`
-
-**Right side:** Three text links in this order:
-1. Systems → `/systems`
-2. Case Studies → `/case-studies`
-3. Contact → `/contact`
+**Right side:** Three text links: Systems, Case Studies, Contact
 
 **Active state:** The link matching the current route is underlined.
 
@@ -539,3 +535,192 @@ hover:bg-neutral-50 transition-colors duration-150
 | 1.2 | Fixed LinkedIn href placeholder (`#`); clarified `"use client"` permitted only on `Navbar.tsx`; resolved `py-12` conflict (Section 5.1 defers to Section 13); specified `<Link>` wrapping for card click behavior; added `/app/favicon.ico` to file structure; normalized `/data/projects.ts` path with leading slash throughout |
 | 1.3 | Added `z-10` to navbar to prevent content overlap; fixed Section 6 intro still citing `py-12` directly; added `className="block"` to `<Link>` card wrappers to ensure full card is clickable; fixed Build Order step 10 acceptance criteria count (13 → 15); normalized `/data/projects.ts` leading slash in AC #6 and #7; resolved hero name font size ambiguity (`text-sm`) |
 | 1.4 | Added Section 20: Acid League design analysis. Updated color palette (black/neutral, no blue), typography (Playfair Display for headings), button style (pill outline), card hover (bg shift not border), section padding increase. |
+
+---
+
+# 21. Experimental: Editorial Minimal DTC Landing Page (Acid League–style)
+
+**Title:** Implement Editorial Minimal DTC Landing Page (Acid League–style)
+
+**Objective**
+Build a minimal, high-end landing page inspired by modern wellness DTC brands (e.g., Acid League, Kin Euphorics). The focus is on clarity, restraint, and strong visual hierarchy — not feature density.
+
+---
+
+## Layout Requirements
+
+### 1. Hero Section (Primary Focus)
+
+* Use a 2-column split layout (50/50)
+* Left: text content
+* Right: product image
+
+**CSS guidance:**
+* Use CSS Grid
+* `grid-template-columns: 1fr 1fr`
+* Full viewport height (`min-height: 100vh`)
+* Generous padding (80px+ on desktop)
+
+**Content structure (left side):**
+* Eyebrow label (small uppercase text)
+* Large headline (1–2 lines max)
+* Short supporting sentence (1 line)
+* Single CTA button
+
+**Do NOT include:**
+* multiple CTAs
+* feature lists
+* icons
+* testimonials in hero
+
+---
+
+## Typography System
+
+* Font: clean sans-serif (Inter preferred)
+* Headline:
+  * Size: 56–72px
+  * Weight: 500–600
+  * Line height: ~1.1–1.2
+* Body:
+  * Size: 16–18px
+  * Line height: ~1.5–1.7
+* Eyebrow:
+  * Small caps or uppercase
+  * Increased letter spacing
+
+**Rules:**
+* Max 2 font weights total
+* Avoid decorative fonts
+* Prioritize spacing over styling
+
+---
+
+## Color System
+
+* Background: off-white (NOT pure white)
+* Text: dark gray (NOT pure black)
+* Accent: 1 muted brand color only
+
+**Example palette:**
+* Background: #F7F5F2
+* Text: #1A1A1A or #2A2A2A
+* Accent: muted blue / olive / amber
+
+**Rules:**
+* No high-contrast black/white combinations
+* Keep palette minimal (3–4 colors max)
+
+---
+
+## Imagery
+
+* Use one high-quality product image
+* Style: editorial still life (not standard e-commerce)
+* Include:
+  * soft shadows
+  * minimal props (1–2 max)
+  * neutral or pastel background
+
+**Image behavior:**
+* Fill right column
+* Maintain aspect ratio
+* No carousels or multiple images in hero
+
+---
+
+## Spacing & Layout Discipline
+
+* Large whitespace throughout
+* Minimum spacing units:
+  * 24px (small)
+  * 48px (medium)
+  * 80px+ (section padding)
+
+**Rules:**
+* Do not crowd elements
+* Each section should feel sparse and intentional
+
+---
+
+## Interaction & Motion
+
+* Keep interactions minimal
+
+**Allowed:**
+* Subtle hover effect on button
+* Light fade-in on load (optional)
+
+**Avoid:**
+* Parallax
+* Heavy animations
+* Complex transitions
+
+**CSS example:**
+* `transition: all 0.2s ease;`
+
+---
+
+## Button Design
+
+* Rounded or pill-shaped button
+* Thin border OR subtle fill
+* No aggressive colors
+
+**States:**
+* Default: neutral
+* Hover: slight opacity or background shift
+
+---
+
+## Copy Constraints
+
+* Headline: 3–6 words max
+* Supporting text: 1 sentence
+* Tone: confident, minimal, slightly abstract
+
+**Avoid:**
+* long paragraphs
+* feature-heavy language
+* marketing buzzwords
+
+---
+
+## Responsiveness
+
+**Mobile behavior:**
+* Collapse to single column
+* Image should stack below text
+* Maintain large spacing (do not compress too tightly)
+
+---
+
+## Technical Notes
+
+* Use semantic HTML
+* Ensure accessibility (contrast, alt text)
+* Optimize image loading (lazy load below fold only)
+* Keep implementation lightweight (no heavy frameworks unless necessary)
+
+---
+
+## Success Criteria
+
+The page should feel:
+* calm
+* premium
+* intentional
+* visually balanced
+
+If it feels busy, cluttered, or overly designed → it is incorrect.
+
+---
+
+## End State
+
+A single, clean landing page with:
+* one strong message
+* one product
+* one action
+
+This is not a marketplace or feature page. It is a focused, editorial product experience.

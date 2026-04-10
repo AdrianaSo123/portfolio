@@ -1,54 +1,52 @@
-import { systems } from "@/data/projects";
+import { SystemCard } from "@/components/SystemCard";
+import { SectionLabel } from "@/components/SectionLabel";
+import { getSystems } from "@/lib/api";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Systems — Adriana So",
   description: "AI systems and pipelines built by Adriana So.",
 };
 
+// Extracted async component to fetch data.
+async function SystemsList() {
+  const systems = await getSystems();
+
+  if (systems.length === 0) {
+    return <p className="text-sm text-muted mt-16">Content coming soon.</p>;
+  }
+
+  return (
+    <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+      {systems.map((project) => (
+        <SystemCard key={project.id} project={project} />
+      ))}
+    </div>
+  );
+}
+
+// Fallback skeleton
+function SystemsSkeleton() {
+  return (
+    <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+      {[1, 2].map((i) => (
+        <div key={i} className="h-80 bg-canvas/30 border border-border/50 animate-pulse" />
+      ))}
+    </div>
+  );
+}
+
 export default function SystemsPage() {
   return (
-    <main className="max-w-[1100px] mx-auto px-6 py-20 md:py-32">
-      <p className="text-xs uppercase tracking-widest text-muted mb-6">Systems</p>
+    <main className="max-w-[1400px] mx-auto px-6 py-20 md:py-32">
+      <SectionLabel className="mb-6">Systems</SectionLabel>
       <h1 className="font-serif text-4xl md:text-5xl font-bold text-ink leading-tight max-w-xl">
         AI pipelines, agents,<br />and structured workflows.
       </h1>
 
-      {systems.length === 0 ? (
-        <p className="text-sm text-muted mt-16">Content coming soon.</p>
-      ) : (
-        <div className="mt-16">
-          {systems.map((project, index) => (
-            <div key={project.id}>
-              {index > 0 && <hr className="border-border" />}
-              <div className="py-10">
-                <h2 className="font-serif text-2xl font-bold text-ink">{project.title}</h2>
-                <p className="text-base text-body mt-4 leading-relaxed max-w-2xl">{project.description}</p>
-
-                <p className="text-xs uppercase tracking-widest text-muted mt-8">Why I built this</p>
-                <p className="text-base text-ink mt-2 leading-relaxed max-w-2xl">{project.whyBuilt}</p>
-
-                <p className="text-xs uppercase tracking-widest text-muted mt-8">How it works</p>
-                <ol className="list-decimal list-inside mt-2 space-y-1">
-                  {project.howItWorks.map((step, i) => (
-                    <li key={i} className="text-base text-body">
-                      {step}
-                    </li>
-                  ))}
-                </ol>
-
-                <p className="text-xs uppercase tracking-widest text-muted mt-8">Key decisions</p>
-                <ul className="list-disc list-inside mt-2 space-y-1">
-                  {project.keyDecisions.map((decision, i) => (
-                    <li key={i} className="text-base text-body">
-                      {decision}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <Suspense fallback={<SystemsSkeleton />}>
+        <SystemsList />
+      </Suspense>
     </main>
   );
 }

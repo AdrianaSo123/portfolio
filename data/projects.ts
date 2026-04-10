@@ -1,27 +1,30 @@
 export type SystemProject = {
   id: string;
   title: string;
-  summary: string; // 1 sentence — used on home page cards
-  description: string; // 2–3 sentences — used on systems page
-  whyBuilt: string; // 1–2 sentences
-  howItWorks: string[]; // ordered steps
-  keyDecisions: string[]; // design choices
-};
-
-export type CaseStudy = {
-  id: string;
-  title: string;
-  summary: string; // 1 sentence — used on home page cards
-  context: string; // 1–2 sentences
-  problem: string; // 1–2 sentences
-  whatIDid: string[]; // bullet points of concrete actions
-  outcome: string; // 1–2 sentences
+  summary: string;
+  description: string;
+  links?: { label: string; url: string }[];
 };
 
 export const systems: SystemProject[] = [
-  // ⚠️ OWNER TO FILL IN — see docs/spec.md Section 11
-];
-
-export const caseStudies: CaseStudy[] = [
-  // ⚠️ OWNER TO FILL IN — see docs/spec.md Section 11
+  {
+    id: "so-studio",
+    title: "SO Studio",
+    summary: "An automated web generation AI system.",
+    description: "An AI system built to intelligently automate site generation and layout configurations. Designed for speed and minimal manual intervention. Built on a Next.js framework for fast edge-rendering.",
+    links: [
+      { label: "Live Deployment ↗", url: "https://so-studio-pi.vercel.app" },
+      { label: "View Source ↗", url: "https://github.com/AdrianaSo123/autoSite" }
+    ]
+  },
+  {
+    id: "unmuted-theme",
+    title: "Unmuted eCommerce",
+    summary: "A modern, highly optimized Shopify theme.",
+    description: "A custom headless-capable Shopify architecture. Built from the ground up to prioritize performance, accessibility, and high-end DTC visual standards. Used a stripped-back styling approach for lightning-fast First Contentful Paint.",
+    links: [
+      { label: "Live Deployment ↗", url: "https://unmuted-shop.myshopify.com" },
+      { label: "View Source ↗", url: "https://github.com/AdrianaSo123/unmuted-theme" }
+    ]
+  }
 ];

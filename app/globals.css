@@ -5,17 +5,17 @@
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
 
   /* Base */
-  --color-ink:    #1a1917;   /* near-black — all references */
-  --color-body:   #7a766f;   /* warm gray body text */
-  --color-muted:  #a09d97;   /* secondary labels */
-  --color-border: #d8d2c8;   /* warm border */
+  --color-ink:    #1A1A1A;   /* dark gray text */
+  --color-body:   #4A4A4A;   /* readable body copy */
+  --color-muted:  #8A8A8A;   /* secondary labels */
+  --color-border: #E5E5E5;   /* neutral border */
 
-  /* Backgrounds — drawn from all 3 refs */
-  --color-canvas: #ffffff;   /* pure white panels (hero left, nav) */
-  --color-cream:  #f5f0e6;   /* soap-brand warm page bg */
-  --color-mist:   #e6edf4;   /* Diafano light blue section bg */
-  --color-panel:  #b8c4d0;   /* Acid League right-panel dusty blue */
+  /* Backgrounds */
+  --color-canvas: #F7F5F2;   /* off-white background */
+  --color-cream:  #F7F5F2;   /* same for minimalism */
+  --color-mist:   #F7F5F2;   /* same for minimalism */
+  --color-panel:  #F7F5F2;   /* same for minimalism */
 
-  /* Accent — Diafano/soap-brand steel blue */
-  --color-accent: #7a90a8;
+  /* Accent */
+  --color-accent: #7A5E9B;   /* muted editorial purple */
 }
