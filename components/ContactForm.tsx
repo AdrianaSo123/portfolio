@@ -5,9 +5,27 @@ import { Button } from "./Button";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
+
+  const validateEmail = (val: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setEmail(val);
+    if (val.length > 0 && !validateEmail(val)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (emailError || email.length === 0) return;
+    
     setStatus("submitting");
     // Simulate network latency for UX
     setTimeout(() => {
@@ -44,12 +62,17 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-xs uppercase tracking-widest text-muted">Email</label>
+        <div className="flex justify-between items-end">
+          <label htmlFor="email" className="text-xs uppercase tracking-widest text-muted">Email</label>
+          {emailError && <span className="text-[10px] uppercase text-red-500/80 tracking-widest">Invalid Format</span>}
+        </div>
         <input 
           type="email" 
           id="email" 
           required 
-          className="w-full bg-transparent border-b border-border py-2 text-ink placeholder:text-muted/50 focus:outline-none focus:border-accent transition-colors"
+          value={email}
+          onChange={handleEmailChange}
+          className={`w-full bg-transparent border-b py-2 text-ink placeholder:text-muted/50 focus:outline-none transition-colors ${emailError ? 'border-red-500/50 focus:border-red-500' : 'border-border focus:border-accent'}`}
           placeholder="jane@example.com"
         />
       </div>
@@ -69,7 +92,7 @@ export function ContactForm() {
         {/* We use standard HTML button here to prevent Button component href default routing */}
         <button 
           type="submit" 
-          disabled={status === "submitting"}
+          disabled={status === "submitting" || emailError || email.length === 0}
           className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium tracking-wide transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-ink text-canvas hover:bg-body hover:shadow-lg hover:-translate-y-0.5"
         >
           {status === "submitting" ? "Sending..." : "Submit Inquiry"}

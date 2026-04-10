@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,9 +29,7 @@ export default function RootLayout({
       <body className="bg-canvas min-h-screen flex flex-col font-sans text-ink">
         <Navbar />
         <div className="flex-1">{children}</div>
-        <footer className="py-8 text-center text-sm text-muted border-t border-border">
-          © 2026 Adriana So
-        </footer>
+        <Footer />
       </body>
     </html>
   );
